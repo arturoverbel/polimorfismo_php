@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Who Is</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Who IS?</h1>
+    <div>
+        <input type="hidden" name="param" value="HostName" id="param">
+        <h2>Hostname: <input type="text" name="value" id="value" value="http://micaminomaster.com.co"></h2>
+        <br>
+        <br>
+        <br>
+        Service: <input type="text" name="service" id="service" value="http://www.webservicex.net/whois.asmx?WSDL"><br>
+        Function: <input type="text" name="function" id="function" value="GetWhoIS">
+        <br><br>
+        <button id="get">Get!</button>
+
+        <br><br><br>
+        <div id="result"></div>
+    </div>
+
+</body>
+<script>
+
+    $( "#get" ).click(function() {
+        var request = $.ajax({
+            url: "controller.php",
+            method: "POST",
+            data: {
+                service : $("#service").val(),
+                param : $("#param").val(),
+                value : $("#value").val(),
+                function : $("#function").val()
+            },
+            dataType: "text"
+        });
+
+        request.done(function( result ) {
+            $( "#result" ).html( result );
+        });
+
+    });
+
+</script>
+</html>
